@@ -8,6 +8,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // mybatis-generator 插件路径
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
     }
 }
 
@@ -26,6 +28,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+//引入 mybatis-generator 插件
+apply plugin: "com.arenagod.gradle.MybatisGenerator"
 
 
 configurations {
@@ -111,6 +115,17 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    //mybatis-generator core 包
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version:'1.3.2'
+}
+
+// mybatis-generator.xml 配置路径
+//这里会遇到个问题：MyBatis Generator 通过xml生成，有日志但是没有生成文件成功的问题，
+//原因：mac下是找不到 ./src 路径的，需要全路径，如下配置。windows则为src/main/resources/generator.xml
+mybatisGenerator {
+    verbose = true
+    configFile = '/Users/zuoyuhui/Documents/project/idea/model/src/main/resources/mybatis/generator.xml'
 }
 
 test {
