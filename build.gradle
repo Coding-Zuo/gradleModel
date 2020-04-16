@@ -110,13 +110,15 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis'
     implementation 'org.springframework.session:spring-session-jdbc'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.security:spring-security-test'
 
     //mybatis-generator core 包
     compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version:'1.3.2'
+
+    //redis
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
 }
 
 // mybatis-generator.xml 配置路径

@@ -1,0 +1,76 @@
+#页面热加载
+spring:
+  session:
+    store-type: none
+  security:
+    user:
+      name: admin
+      password: admin
+  thymeleaf:
+    cache: false
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/db_dfcserver?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    username: root
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+  redis:
+    host: 127.0.0.1
+    database: 4
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-active:  8 #最大连接数
+        max-wait: -1   #最大阻塞等待时间(负数表示没限制)
+        max-idle: 8  #最大空闲
+        min-idle: 0  #最小空闲
+
+
+local:
+  fileserver:
+    dir: /Users/zuoyuhui/Documents/oldMac/Servers/footpad
+    path: serverdata
+
+#  http:
+#    multipart:
+#      enabled: true
+#      max-file-size: 30MB
+#      max-request-size: 30MB
+
+
+server:
+  port: 80
+  tomcat:
+    remote-ip-header: x-forward-for
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-http-header-size: 12096
+
+mybatis:
+  type-aliases-package: com.zuo.model.po
+  mapper-locations: classpath:mapper/*.xml
+  check-config-location: true
+
+logging:
+  level:
+    com.zuo.model.mapper: debug
+
+#测试号
+#wechat:
+#  mpAppId: wx4fc949baa3e2c32e
+#  mpAppSecret: 11f467443d598283d051622342236041
+
+wechat:
+  mpAppId: wxbb7e141297bb1d98
+  mpAppSecret: 0c6f5f181d561d5f3b21eba414703c87
+  #EncodingAESKey:9bql0h2rj3GJ3WWViOfpc3aEMIoVIXjyEuUyKbStvYL
+
+
