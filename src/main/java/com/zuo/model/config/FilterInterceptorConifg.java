@@ -1,7 +1,7 @@
 package com.zuo.model.config;
 
-import com.zuo.model.system.MyFillter;
-import com.zuo.model.system.MyInterceptor;
+import com.zuo.model.config.system.MyFillter;
+import com.zuo.model.config.system.MyInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

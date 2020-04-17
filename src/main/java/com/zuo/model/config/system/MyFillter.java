@@ -1,6 +1,4 @@
-package com.zuo.model.system;
-
-import org.springframework.stereotype.Component;
+package com.zuo.model.config.system;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -14,7 +14,7 @@ public class UserController {
 
     @RequestMapping(value = "/user1", method = RequestMethod.GET)
     @ResponseBody
-    public String query() {
+    public String query(String id) {
         return "123";
     }
 

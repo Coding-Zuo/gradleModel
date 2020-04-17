@@ -1,4 +1,4 @@
-package com.zuo.model.system;
+package com.zuo.model.config.system;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -15,7 +15,6 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println(((HandlerMethod)handler).getBean().getClass().getName());
         System.out.println(((HandlerMethod)handler).getMethod().getName());
-        System.out.println(1);
         return true;
     }
 
