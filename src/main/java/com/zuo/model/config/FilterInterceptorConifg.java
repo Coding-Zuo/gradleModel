@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -15,11 +16,19 @@ import java.util.List;
 /**
  * 第三方框架的过滤器配置
  */
-@Configuration
+//@Configuration
 public class FilterInterceptorConifg implements WebMvcConfigurer {
 
     @Autowired
     private MyInterceptor myInterceptor;
+
+//    //拦截异步请求
+//    @Override
+//    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+//        configurer.registerCallableInterceptors();
+//        configurer.registerDeferredResultInterceptors();
+//        configurer.setDefaultTimeout();
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

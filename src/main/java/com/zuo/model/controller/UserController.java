@@ -12,6 +12,11 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String query1() {
+        return "index";
+    }
+
     @RequestMapping(value = "/user1", method = RequestMethod.GET)
     @ResponseBody
     public String query(String id) {
