@@ -33,6 +33,8 @@ spring:
         max-idle: 8  #最大空闲
         min-idle: 0  #最小空闲
 
+swagger2:
+  enable: true
 
 local:
   fileserver:
