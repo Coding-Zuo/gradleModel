@@ -120,7 +120,6 @@ dependencies {
     //redis
     compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
     // swagger
-
     implementation "io.springfox:springfox-swagger2:2.9.2"
     implementation "io.springfox:springfox-swagger-ui:2.9.2"
 }

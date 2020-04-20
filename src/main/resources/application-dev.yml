@@ -46,7 +46,10 @@ local:
 #      enabled: true
 #      max-file-size: 30MB
 #      max-request-size: 30MB
-
+zuo:
+  security:
+    browser:
+      loginPage: /login #登录页配置
 
 server:
   port: 80

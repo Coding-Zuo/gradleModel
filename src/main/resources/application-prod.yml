@@ -36,7 +36,6 @@ spring:
 
 swagger2:
   enable: false
-
 local:
   fileserver:
     dir: /var/local/webapp/aifoot/fileServer
@@ -48,6 +47,10 @@ local:
 #      max-file-size: 30MB
 #      max-request-size: 30MB
 
+zuo:
+  security:
+    browser:
+      loginPage: /login
 
 server:
   port: 80

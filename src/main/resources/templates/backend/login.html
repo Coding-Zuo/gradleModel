@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>后台主题框架 - 登录</title>
+    <meta name="keywords" content="响应式后台">
+    <meta name="description" content="model">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/static/hplus/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="/static/hplus/css/font-awesome.min93e3.css" rel="stylesheet">
+
+    <link href="/static/hplus/css/animate.min.css" rel="stylesheet">
+    <link href="/static/hplus/css/style.min862f.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <script>
+        function getUrlParam(id) {
+            var regExp = new RegExp('([?]|&)' + id+ '=([^&]*)(&|$)');
+            var result = window.location.href.match(regExp);
+            if (result) {
+                return decodeURIComponent(result[2]);
+            } else {
+                return null;
+            }
+
+        }
+        function getPath() {
+            //获取当前网址，如：
+            var curWwwPath = window.document.location.href;
+            //获取主机地址之后的目录如：/Tmall/index.jsp
+            var pathName = window.document.location.pathname;
+            var pos = curWwwPath.indexOf(pathName);
+            //获取主机地址，如：//localhost:8080
+            var localhostPaht = curWwwPath.substring(0, pos);
+            //获取带"/"的项目名，如：/Tmall
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+            return localhostPaht;
+        }
+    </script>
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">ZUO</h1>
+
+            </div>
+            <h3>欢迎使用</h3>
+
+            <form class="m-t" role="form" action="/loginProcess" method="post">
+                <div class="form-group">
+                    <input name="username" type="email" class="form-control" placeholder="用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" placeholder="密码" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+    <script src="/static/hplus/js/jquery.min.js"></script>
+    <script src="/static/hplus/js/bootstrap.min.js"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
+</html>

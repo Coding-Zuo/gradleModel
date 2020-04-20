@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyAspect {
 
-    @Around("execution(* com.zuo.model.controller.UserController.*(..))")
+//    @Around("execution(* com.zuo.model.controller.UserController.*(..))")
     public Object loginSession(ProceedingJoinPoint thisJoinPoint) throws Throwable {
         Object[] args=thisJoinPoint.getArgs();//拿到方法的参数
         for(Object arg:args){

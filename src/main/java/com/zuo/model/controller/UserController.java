@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class UserController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -17,10 +17,10 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping(value = "/user1", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
-    public String query(String id) {
-        return "123";
+    public String query() {
+        return "index";
     }
 
 }
