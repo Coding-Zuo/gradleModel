@@ -50,6 +50,7 @@ zuo:
   security:
     browser:
       loginPage: /login #登录页配置
+      loginType: REDIRECT
 
 server:
   port: 80

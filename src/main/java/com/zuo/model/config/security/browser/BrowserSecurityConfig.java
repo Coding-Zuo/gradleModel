@@ -15,11 +15,20 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
+    @Autowired
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage(securityProperties.getBrowser().getLoginPage()).failureUrl("/login-error") //自定义登录界面
+                .loginPage(securityProperties.getBrowser().getLoginPage())
+//                .failureUrl("/login-error") //自定义登录界面
                 .loginProcessingUrl("/loginProcess")
+                .successHandler(myAuthenticationSuccessHandler)
+                .failureHandler(myAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/static/**","/css/**", "/js/**", "/fonts/**",

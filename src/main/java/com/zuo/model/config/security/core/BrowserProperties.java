@@ -5,6 +5,15 @@ public class BrowserProperties {
 
     private String loginPage;
 
+    private LoginType loginType=LoginType.JSON; //默认配置项返回JSON也可直接跳转
+
+    public LoginType getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(LoginType loginType) {
+        this.loginType = loginType;
+    }
 
     public void setLoginPage(String loginPage) {
         this.loginPage = loginPage;
