@@ -1,6 +1,7 @@
 package com.zuo.model.config.security.browser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zuo.model.config.security.browser.support.SimpleResponse;
 import com.zuo.model.config.security.core.LoginType;
 import com.zuo.model.config.security.core.SecurityProperties;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
         if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(exception));
+            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
         }else {
             super.onAuthenticationFailure(request,response,exception);
         }

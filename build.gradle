@@ -122,6 +122,9 @@ dependencies {
     // swagger
     implementation "io.springfox:springfox-swagger2:2.9.2"
     implementation "io.springfox:springfox-swagger-ui:2.9.2"
+
+    implementation 'org.springframework.social:spring-social-web:1.1.6.RELEASE'
+    implementation 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
 }
 
 // mybatis-generator.xml 配置路径

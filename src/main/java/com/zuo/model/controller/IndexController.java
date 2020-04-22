@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class IndexController extends AbstractController {
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     //把当前的请求缓存到session中
     private RequestCache requestCache = new HttpSessionRequestCache();
@@ -39,7 +38,7 @@ public class IndexController extends AbstractController {
 
     @RequestMapping(value = {"/", "index"})
     @ApiOperation(value = "首页测试")
-    public String Index() {
+    public String Index(Map<String,Object> params) {
         return "index";
     }
 
@@ -47,6 +46,12 @@ public class IndexController extends AbstractController {
     @ApiOperation(value = "登录页面")
     public String login() {
         return "backend/login";
+    }
+
+    @RequestMapping(value = {"loginProcess"})
+    @ApiOperation(value = "登录处理")
+    public String loginProcess() {
+        return "index";
     }
 
 //    @RequestMapping(value = "authentication/require")

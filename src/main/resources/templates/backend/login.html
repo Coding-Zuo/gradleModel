@@ -22,29 +22,21 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <script src="/static/hplus/js/jquery.min.js"></script>
+    <script src="/static/hplus/js/bootstrap.min.js"></script>
+    <script src="/static/js/ajaxFengzhuang.js"></script>
     <script>
-        function getUrlParam(id) {
-            var regExp = new RegExp('([?]|&)' + id+ '=([^&]*)(&|$)');
-            var result = window.location.href.match(regExp);
-            if (result) {
-                return decodeURIComponent(result[2]);
-            } else {
-                return null;
-            }
+        $(function () {
+            $("#formID").submit(function(e){
+                postFormAjax("/loginProcess","formID",function (data) {
+                    redirectWindow("/");
+                },function (err) {
+                    alert($.parseJSON(err.responseText).content);
+                });
+                return false;
+            });
+        })
 
-        }
-        function getPath() {
-            //获取当前网址，如：
-            var curWwwPath = window.document.location.href;
-            //获取主机地址之后的目录如：/Tmall/index.jsp
-            var pathName = window.document.location.pathname;
-            var pos = curWwwPath.indexOf(pathName);
-            //获取主机地址，如：//localhost:8080
-            var localhostPaht = curWwwPath.substring(0, pos);
-            //获取带"/"的项目名，如：/Tmall
-            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-            return localhostPaht;
-        }
     </script>
 </head>
 
@@ -59,14 +51,18 @@
             </div>
             <h3>欢迎使用</h3>
 
-            <form class="m-t" role="form" action="/loginProcess" method="post">
+            <form class="m-t" id="formID" role="form" >
                 <div class="form-group">
                     <input name="username" type="email" class="form-control" placeholder="用户名" required="">
                 </div>
                 <div class="form-group">
                     <input name="password" type="password" class="form-control" placeholder="密码" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <div class="form-group">
+                    <input name="imageCode" type="text" class="form-control"  placeholder="验证码" required="" style="width: 75%;display: inline-block;">
+                    <img src="/code/image">
+                </div>
+                <button id="submitBtn" type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
 
                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
@@ -75,8 +71,6 @@
             </form>
         </div>
     </div>
-    <script src="/static/hplus/js/jquery.min.js"></script>
-    <script src="/static/hplus/js/bootstrap.min.js"></script>
 </body>
 
 

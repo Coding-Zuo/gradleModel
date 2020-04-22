@@ -1,5 +1,6 @@
 package com.zuo.model.controller;
 
+import com.zuo.model.utils.common.mvc.AbstractController;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/user")
-public class UserController {
+public class UserController extends AbstractController {
 
     @RequestMapping(value = "/me",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
