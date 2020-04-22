@@ -1,4 +1,6 @@
-package com.zuo.model.config.security.validate;
+package com.zuo.model.config.security.validate.ImageCode;
+
+import com.zuo.model.config.security.validate.ValidateCode;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
@@ -6,7 +8,7 @@ import java.time.LocalDateTime;
 /**
  * 验证码
  */
-public class ImageCode extends ValidateCode{
+public class ImageCode extends ValidateCode {
     private BufferedImage image;
     private String code;
     private LocalDateTime expireTime;

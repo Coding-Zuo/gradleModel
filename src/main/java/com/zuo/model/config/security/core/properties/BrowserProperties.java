@@ -1,5 +1,7 @@
-package com.zuo.model.config.security.core;
+package com.zuo.model.config.security.core.properties;
 
+
+import com.zuo.model.config.security.core.LoginType;
 
 public class BrowserProperties {
 

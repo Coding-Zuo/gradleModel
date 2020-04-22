@@ -52,6 +52,12 @@ zuo:
     browser:
       loginPage: /login #登录页配置
       loginType: REDIRECT
+    code:
+      image:
+        length: 6
+        width: 100
+        height: 23
+        expireIn: 60
 
 server:
   port: 80

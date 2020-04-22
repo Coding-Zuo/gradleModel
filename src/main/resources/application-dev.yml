@@ -51,6 +51,13 @@ zuo:
     browser:
       loginPage: /login #登录页配置
       loginType: JSON #JSON 或 REDIRECT
+    code:
+      image:
+        length: 4
+        width: 67
+        height: 23
+        expireIn: 60
+        url:
 
 server:
   port: 80
