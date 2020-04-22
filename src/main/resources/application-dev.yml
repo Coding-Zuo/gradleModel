@@ -46,6 +46,8 @@ local:
 #      enabled: true
 #      max-file-size: 30MB
 #      max-request-size: 30MB
+
+#记住我功能 的表需要创建一次在系统第一次启动时。配置点在BrowserSecurityConfig
 zuo:
   security:
     browser:
