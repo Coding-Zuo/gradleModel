@@ -58,8 +58,11 @@ zuo:
         length: 4
         width: 67
         height: 23
-        expireIn: 60
+        expireIn: 120
         url:
+      sms:
+        length: 6
+        expireIn: 180
 
 server:
   port: 80

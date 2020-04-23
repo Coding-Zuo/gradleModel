@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 
 /**
- * @author zhailiang
  *
  */
 public class ValidateCode {

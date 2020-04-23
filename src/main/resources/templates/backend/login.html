@@ -35,6 +35,16 @@
                 });
                 return false;
             });
+
+
+            $("#shoujiyincang").click(function(){
+                $("#formIDMobile").hide();
+                $("#formID").show();
+            });
+            $("#zhanghaoyincang").click(function () {
+                $("#formID").hide();
+                $("#formIDMobile").show();
+            });
         })
 
     </script>
@@ -46,7 +56,7 @@
         <div>
             <div>
 
-                <h1 class="logo-name">ZUO</h1>
+                <h1 class="logo-name">YXB</h1>
 
             </div>
             <h3>欢迎使用</h3>
@@ -66,8 +76,25 @@
                 <button id="submitBtn" type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
 
-                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>|
-                    <input name="remember-me" type="checkbox" value="true">记住我
+                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册</a>|
+                    <a id="zhanghaoyincang">手机短信登录</a>| <input name="remember-me" type="checkbox" value="true">记住我
+                </p>
+
+            </form>
+
+            <form class="m-t" id="formIDMobile" role="form" style="display: none;" >
+                <div class="form-group">
+                    <input name="mobile" type="text" class="form-control" placeholder="手机号" required="">
+                </div>
+                <div class="form-group">
+                    <input name="smsCode" type="text" class="form-control" placeholder="短信验证码" required="" style="width: 75%;display: inline-block;">
+                    <a href="/code/sms?mobile=15243220688">发送验证码</a>
+                </div>
+                <button id="submitBtnMobile" type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册</a>|
+                    <a id="shoujiyincang">账号密码登录</a>
                 </p>
 
             </form>

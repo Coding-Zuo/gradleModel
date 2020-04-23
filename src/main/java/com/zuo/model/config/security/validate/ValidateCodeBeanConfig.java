@@ -2,6 +2,8 @@ package com.zuo.model.config.security.validate;
 
 import com.zuo.model.config.security.core.SecurityProperties;
 import com.zuo.model.config.security.validate.ImageCode.ImageCodeGenerator;
+import com.zuo.model.config.security.validate.smsCode.DefaultSmsCodeSender;
+import com.zuo.model.config.security.validate.smsCode.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +21,12 @@ public class ValidateCodeBeanConfig {
         ImageCodeGenerator codeGenerator=new ImageCodeGenerator();
         codeGenerator.setSecurityProperties(securityProperties);
         return codeGenerator;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "smsCodeSender")//不存在这个bean的时候做这个配置
+    public SmsCodeSender smsCodeSender(){
+        return new DefaultSmsCodeSender();
     }
 
 }
