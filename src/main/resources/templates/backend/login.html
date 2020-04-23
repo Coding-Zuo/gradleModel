@@ -29,6 +29,16 @@
         $(function () {
             $("#formID").submit(function(e){
                 postFormAjax("/loginProcess","formID",function (data) {
+                    alert(data);
+                    redirectWindow("/");
+                },function (err) {
+                    alert($.parseJSON(err.responseText).content);
+                });
+                return false;
+            });
+            $("#formIDMobile").submit(function(e){
+                postFormAjax("/authentication/mobile","formIDMobile",function (data) {
+                    alert(data);
                     redirectWindow("/");
                 },function (err) {
                     alert($.parseJSON(err.responseText).content);
@@ -37,6 +47,19 @@
             });
 
 
+            $("#sendSmsCodeBtn").click(function(){
+                var mobileNum=$("#mobileNumber").val();
+                if(mobileNum==""){
+                    alert("请输入手机号");
+                    return ;
+                }
+                getAjax("/code/sms","mobile="+mobileNum,function(data){
+                    console.log(data);
+                },function (err) {
+                    console.log(err);
+                });
+                return false;
+            });
             $("#shoujiyincang").click(function(){
                 $("#formIDMobile").hide();
                 $("#formID").show();
@@ -84,11 +107,11 @@
 
             <form class="m-t" id="formIDMobile" role="form" style="display: none;" >
                 <div class="form-group">
-                    <input name="mobile" type="text" class="form-control" placeholder="手机号" required="">
+                    <input id="mobileNumber" name="mobile" type="text" class="form-control" placeholder="手机号" required="">
                 </div>
                 <div class="form-group">
                     <input name="smsCode" type="text" class="form-control" placeholder="短信验证码" required="" style="width: 75%;display: inline-block;">
-                    <a href="/code/sms?mobile=15243220688">发送验证码</a>
+                    <a id="sendSmsCodeBtn" href="#">发送验证码</a>
                 </div>
                 <button id="submitBtnMobile" type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 

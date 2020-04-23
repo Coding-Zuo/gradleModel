@@ -62,6 +62,7 @@ zuo:
       sms:
         length: 6
         expireIn: 180
+        url:
 
 server:
   port: 80

@@ -29,8 +29,6 @@ import java.util.Random;
 @Api(value = "验证码接口,使用spring依赖搜索 实现图片、短信验证码，方便扩展")
 public class ValidateCodeController {
 
-    public static final String SESSION_KEY = "SESSION_KEY_FOR_CODE_IMAGE";
-
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Autowired

@@ -13,7 +13,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * 图片验证码处理器
  * 
- *
  */
 @Component("imageCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {

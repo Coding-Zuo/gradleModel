@@ -1,6 +1,8 @@
 package com.zuo.model.config.security.browser;
 
 import com.zuo.model.config.security.core.SecurityProperties;
+import com.zuo.model.config.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.zuo.model.config.security.validate.SmsCodeFilter;
 import com.zuo.model.config.security.validate.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +36,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
     @Bean
     public PersistentTokenRepository persistentTokenRepository(){
         JdbcTokenRepositoryImpl jdbcTokenRepository=new JdbcTokenRepositoryImpl();
@@ -49,7 +54,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         validateCodeFilter.setSecurityProperties(securityProperties);
         validateCodeFilter.afterPropertiesSet();
 
-        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+        SmsCodeFilter smsCodeFilter=new SmsCodeFilter();
+        smsCodeFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
+        smsCodeFilter.setSecurityProperties(securityProperties);
+        smsCodeFilter.afterPropertiesSet();
+
+        http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
                     .loginPage(securityProperties.getBrowser().getLoginPage())
     //                .failureUrl("/login-error") //自定义登录界面
@@ -61,14 +72,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenRepository(persistentTokenRepository())
                     .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                     .userDetailsService(userDetailsService)
-                .and()
+                    .and()
                 .authorizeRequests()
-                .antMatchers("/static/**","/css/**", "/js/**", "/fonts/**",
-                        securityProperties.getBrowser().getLoginPage(),"/code/*","/swagger-ui.html/*").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .csrf().disable();
+                    .antMatchers("/static/**","/css/**", "/js/**", "/fonts/**",
+                            securityProperties.getBrowser().getLoginPage(),"/code/*","/swagger-ui.html/*").permitAll()
+                    .anyRequest()
+                    .authenticated()
+                    .and()
+                .csrf().disable()
+                .apply(smsCodeAuthenticationSecurityConfig);
 
 //        http.authorizeRequests()
 //                .antMatchers("/css/**", "/js/**", "/fonts/**").permitAll() //都可以访问

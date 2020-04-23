@@ -1,4 +1,4 @@
-package com.zuo.model.config.security.browser;
+package com.zuo.model.config.security.core.authentication.account;
 
 
 import org.slf4j.Logger;

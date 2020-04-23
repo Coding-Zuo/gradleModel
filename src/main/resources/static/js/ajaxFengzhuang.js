@@ -27,7 +27,7 @@ function redirectWindow(url){
     window.location.href=getPath()+url;
 }
 
-function postAjax(url,param,success){
+function postAjax(url,param,success,error){
     $.ajax({
         type: "POST",
         url: getPath()+url,
@@ -36,12 +36,20 @@ function postAjax(url,param,success){
         dataType:'json',
         contentType:"application/json",
         success: success,
-        error: function(err){
-            console.log(err)
-        }
+        error: error
     });
 }
 
+function getAjax(url,param,success,error){
+    $.ajax({
+        url : getPath() + url+"?"+param,
+        type : 'GET',
+        dataType : 'json',
+        // data:JSON.stringify(param),
+        success : success,
+        error : error
+    });
+}
 function postFormAjax(url,formId,success,error){
     $.ajax({
         type: "POST",
@@ -54,4 +62,6 @@ function postFormAjax(url,formId,success,error){
         error: error
     });
 }
+
+
 

@@ -20,60 +20,38 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
  * 验证码过滤器
  */
 @Component
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
     private Set<String> urls=new HashSet<>();
 
-    /**
-     * 配置信息
-     */
     @Autowired
     private SecurityProperties securityProperties;
 
     private AntPathMatcher antPathMatcher=new AntPathMatcher();
 
-    /**
-     * 校验码失败处理器
-     */
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
-    /**
-     * 存放所有需要校验验证码的url
-     */
-    private Map<String, ValidateCodeType> urlMap = new HashMap<>();
-    /**
-     * 验证请求url与配置的url是否匹配的工具类
-     */
-    private AntPathMatcher pathMatcher = new AntPathMatcher();
-
-    /**
-     * 系统中的校验码处理器
-     */
-    @Autowired
-    private ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
     private SessionStrategy sessionStrategy=new HttpSessionSessionStrategy();
 
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        Object o=securityProperties.getCode().getImage().getUrl();
-        if(o!=null || securityProperties.getCode().getImage().getUrl()!=""){
-            String[] configUrls=StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(),",");
+        Object o=securityProperties.getCode().getSms().getUrl();
+        if(o!=null || securityProperties.getCode().getSms().getUrl()!=""){
+            String[] configUrls=StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getSms().getUrl(),",");
             for(String url:configUrls){
                 urls.add(url);
             }
         }
-        urls.add("/loginProcess");
+        urls.add("/authentication/mobile");
     }
 
     @Override
@@ -99,8 +77,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     }
 
     private void validate(ServletWebRequest request,HttpServletResponse response) throws ServletRequestBindingException, IOException {
-        ImageCode codeInSession=(ImageCode)sessionStrategy.getAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"IMAGE");
-        String codeInRequest= ServletRequestUtils.getStringParameter(request.getRequest(),"imageCode");
+        ValidateCode codeInSession=(ValidateCode) sessionStrategy.getAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"SMS");
+        String codeInRequest= ServletRequestUtils.getStringParameter(request.getRequest(),"smsCode");
         if(StringUtils.isBlank(codeInRequest)){
             logger.info("验证码的值不能为空");
 //            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -116,7 +94,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("验证码不存在");
         }
         if(codeInSession.isExpried()){
-            sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"IMAGE");
+            sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"SMS");
             logger.info("验证码已过期");
 //            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 //            response.setContentType("application/json;charset=UTF-8");
@@ -130,7 +108,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 //            response.getWriter().write("验证码不匹配");
             throw new ValidateCodeException("验证码不匹配");
         }
-        sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"IMAGE");
+        sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX+"SMS");
     }
 
     public AuthenticationFailureHandler getAuthenticationFailureHandler() {
