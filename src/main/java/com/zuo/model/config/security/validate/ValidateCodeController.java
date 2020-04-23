@@ -3,6 +3,8 @@ package com.zuo.model.config.security.validate;
 import com.zuo.model.config.security.core.SecurityProperties;
 import com.zuo.model.config.security.validate.ImageCode.ImageCode;
 import com.zuo.model.config.security.validate.smsCode.SmsCodeSender;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
@@ -24,9 +26,10 @@ import java.util.Map;
 import java.util.Random;
 
 @RestController
+@Api(value = "验证码接口,使用spring依赖搜索 实现图片、短信验证码，方便扩展")
 public class ValidateCodeController {
 
-    public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+    public static final String SESSION_KEY = "SESSION_KEY_FOR_CODE_IMAGE";
 
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
@@ -55,6 +58,7 @@ public class ValidateCodeController {
      * @param type
      * @throws Exception
      */
+    @ApiOperation(value = "验证码接口",notes = "短信、图片验证码根据请求调用")
     @GetMapping("/code"+ "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type)
             throws Exception {

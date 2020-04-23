@@ -64,7 +64,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/static/**","/css/**", "/js/**", "/fonts/**",
-                        securityProperties.getBrowser().getLoginPage(),"/code/*").permitAll()
+                        securityProperties.getBrowser().getLoginPage(),"/code/*","/swagger-ui.html/*").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

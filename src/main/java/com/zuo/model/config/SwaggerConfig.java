@@ -56,7 +56,7 @@ public class SwaggerConfig {
                 .enable(swagger2Enable)  //方式三
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.zuo.model.controller"))  // 注意修改此处的包名
+                .apis(RequestHandlerSelectors.basePackage("com.zuo.model"))  // 注意修改此处的包名
                 .paths(PathSelectors.any())
                 .build();
     }
