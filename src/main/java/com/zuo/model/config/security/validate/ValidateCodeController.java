@@ -1,5 +1,6 @@
 package com.zuo.model.config.security.validate;
 
+import com.zuo.model.config.security.core.SecurityConstants;
 import com.zuo.model.config.security.core.SecurityProperties;
 import com.zuo.model.config.security.validate.ImageCode.ImageCode;
 import com.zuo.model.config.security.validate.smsCode.SmsCodeSender;
@@ -29,17 +30,6 @@ import java.util.Random;
 @Api(value = "验证码接口,使用spring依赖搜索 实现图片、短信验证码，方便扩展")
 public class ValidateCodeController {
 
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
-
-    @Autowired
-    private ValidateCodeGenerator imageCodeGenerator;
-
-    @Autowired
-    private ValidateCodeGenerator smsCodeGenerator;
-
-    @Autowired
-    private SmsCodeSender smsCodeSender;
-
     /**
      * 系统配置
      */
@@ -47,7 +37,7 @@ public class ValidateCodeController {
     private SecurityProperties securityProperties;
 
     @Autowired
-    private Map<String,ValidateCodeProcessor> validateCodeProcessors;
+    private ValidateCodeProcessorHolder validateCodeProcessorHolder;
     /**
      * 创建验证码，根据验证码类型不同，调用不同的 {@link ValidateCodeProcessor}接口实现
      *
@@ -57,11 +47,10 @@ public class ValidateCodeController {
      * @throws Exception
      */
     @ApiOperation(value = "验证码接口",notes = "短信、图片验证码根据请求调用")
-    @GetMapping("/code"+ "/{type}")
+    @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type)
             throws Exception {
-//        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
-        validateCodeProcessors.get(type+"CodeProcessor").create(new ServletWebRequest(request,response));
+        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
     }
 
 //    @GetMapping("/code/image")
