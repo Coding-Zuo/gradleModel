@@ -63,6 +63,11 @@ zuo:
         length: 6
         expireIn: 180
         url:
+    social:
+      qq:
+        app-id: 100550231
+        app-secret: 69b6ab57b22f3c2fe6a6149274e3295e
+
 
 server:
   port: 80
